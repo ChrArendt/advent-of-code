@@ -1,5 +1,6 @@
 use std::fs;
 fn main() {
+    let part = 2;
     let content = fs::read_to_string("./input.txt").expect("Should be able to read file");
     let rows = content.lines();
     let mut count = 0;
@@ -15,10 +16,22 @@ fn main() {
         let c = elves_vec.get(1).expect("Should get element").split("-").nth(0).unwrap().parse::<i32>().unwrap();
         let d = elves_vec.get(1).expect("Should get element").split("-").nth(1).unwrap().parse::<i32>().unwrap();
 
-        if (a <= c && b >= d)
-            || (a >= c && b <= d) {
-            count = count + 1;
+        if part == 1{
+            if (a <= c && b >= d)
+                || (a >= c && b <= d) {
+                count = count + 1;
+            }
+        } else if part == 2{
+            if (a <= c && b >= c)
+                || (a >= c && a <= d) {
+                count = count + 1;
+            }
         }
     }
-    println!("Number of full overlaps: {:?}",count)
+    if part == 1 {
+        println!("Number of full overlaps: {:?}", count)
+    }
+    else if part == 2 {
+        println!("Number of overlaps: {:?}", count)
+    }
 }
